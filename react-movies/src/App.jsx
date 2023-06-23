@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
-import { withResults, withoutResults } from './mocks/movies'
+import { searchMovies } from './services/movies'
 
 function App () {
   const [movies, setMovies] = useState([])
@@ -9,7 +9,10 @@ function App () {
   const handleSubmit = (event) => {
     event.preventDefault()
     isFirstRender.current = false
-    setMovies(withoutResults.Search || [])
+    const formData = new window.FormData(event.target)
+    const searchText = formData.get('search')
+    const foundMovies = searchMovies(searchText)
+    setMovies(foundMovies)
   }
 
   const renderListOfMovies = () => {
