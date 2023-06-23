@@ -22,6 +22,7 @@ function NoMoviesFound () {
 }
 
 export function Movies ({ movies }) {
+  if (!movies) return
   const hasMovies = movies?.length > 0
 
   return (

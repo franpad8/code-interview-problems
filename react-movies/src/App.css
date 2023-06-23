@@ -49,3 +49,7 @@ header {
   align-items: center;
   gap: 1rem;
 }
+
+.errors {
+  color: rgba(255, 0, 0, .7);
+}
