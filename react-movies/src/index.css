@@ -60,6 +60,8 @@ body {
     sans-serif;
   color: var(--text);
   background: var(--background-body);
+  margin: 20px auto;
+  max-width: 800px;
 }
 
 /* Content sectioning */

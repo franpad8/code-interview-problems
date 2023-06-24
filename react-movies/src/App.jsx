@@ -19,7 +19,7 @@ function App () {
   const hasError = error.length > 0
 
   return (
-    <div id='page'>
+    <div className='page'>
       <header>
         <h1>
           Movie Search
