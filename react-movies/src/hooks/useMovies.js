@@ -5,9 +5,9 @@ export function useMovies () {
   const [movies, setMovies] = useState(null)
 
   function getMovies (search) {
-    const returnedMovies = searchMovies(search)
-    setMovies(returnedMovies)
-    return returnedMovies
+    searchMovies(search).then(returnedMovies => {
+      setMovies(returnedMovies)
+    })
   }
 
   return [movies, getMovies]
