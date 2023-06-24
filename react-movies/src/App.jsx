@@ -5,7 +5,7 @@ import { useMovies } from './hooks/useMovies'
 
 function App () {
   const [search, updateSearch, error] = useSearch()
-  const [movies, getMovies] = useMovies()
+  const [movies, getMovies, loading] = useMovies()
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -39,7 +39,11 @@ function App () {
       </header>
 
       <main>
-        <Movies movies={movies} />
+        {
+          loading
+            ? <p>Loading...</p>
+            : <Movies movies={movies} />
+        }
       </main>
     </div>
   )
