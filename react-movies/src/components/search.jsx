@@ -10,6 +10,7 @@ export function Search ({ getMovies, updateSort }) {
 
   const handleChange = (event) => {
     updateSearch(event.target.value)
+    getMovies(event.target.value)
   }
 
   const hasError = error.length > 0

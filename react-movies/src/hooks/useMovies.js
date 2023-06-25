@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useCallback } from 'react'
 import { searchMovies } from '../services/movies'
 
 export function useMovies ({ sort }) {
@@ -6,7 +6,7 @@ export function useMovies ({ sort }) {
   const [loading, setLoading] = useState(false)
   const previousSearch = useRef('')
 
-  function getMovies (search) {
+  const getMovies = useCallback(search => {
     if (previousSearch.current === search) return
     previousSearch.current = search
     setLoading(true)
@@ -17,7 +17,7 @@ export function useMovies ({ sort }) {
       .finally(() => {
         setLoading(false)
       })
-  }
+  }, [])
 
   function sortedMovies () {
     if (!sort) {
