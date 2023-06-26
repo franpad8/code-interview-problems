@@ -1,12 +1,11 @@
-import products from '../mocks/products.json'
 import './Products.css'
 
-export function Products () {
+export function Products ({ products }) {
   return (
     <main className='products'>
       <ul>
         {
-          products.products.map(product => (
+          products.map(product => (
             <li key={product.id}>
               <img src={product.thumbnail} alt={product.title} />
               <div>
