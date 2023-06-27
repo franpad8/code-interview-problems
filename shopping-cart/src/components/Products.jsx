@@ -15,7 +15,7 @@ function ProductItem ({ product, isInCart, addToCart, removeFromCart }) {
     <li>
       <img src={product.thumbnail} alt={product.title} />
       <div>
-        <strong>{product.title}</strong> - {product.price}$
+        <strong>{product.title}</strong> - ${product.price}
       </div>
       <div>
         <button

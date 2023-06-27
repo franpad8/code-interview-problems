@@ -5,9 +5,18 @@ export function useCart () {
   const { cart, setCart } = useContext(CartContext)
 
   function addToCart (product) {
-    const productToAdd = { ...product, quantity: 1 }
     setCart((prevState) => {
-      return [...prevState].concat([productToAdd])
+      const newCart = [...prevState]
+
+      if (alreadyInCart(product)) {
+        const productToUpdate = newCart.find(p => p.id === product.id)
+        productToUpdate.quantity += 1
+      } else {
+        const productToAdd = { ...product, quantity: 1 }
+        newCart.push(productToAdd)
+      }
+
+      return newCart
     })
   }
 
@@ -21,5 +30,6 @@ export function useCart () {
     })
   }
 
-  return { addToCart, alreadyInCart, cart, removeFromCart }
+  const total = cart.reduce((sum, product) => sum + product.price * product.quantity, 0)
+  return { addToCart, alreadyInCart, cart, removeFromCart, total }
 }

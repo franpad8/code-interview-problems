@@ -28,7 +28,7 @@ const EmptyCart = () => (<p>Aun no hay productos en el carrito</p>)
 
 export function Cart () {
   const cartCheckboxId = useId()
-  const { cart } = useCart()
+  const { addToCart, cart, total } = useCart()
   const hasProducts = cart.length > 0
 
   return (
@@ -42,16 +42,22 @@ export function Cart () {
         {
           hasProducts
             ? (
-              <ul>
-                {
-                  cart.map(product => (
-                    <CartItem
-                      key={product.id}
-                      {...product}
-                    />
-                  ))
-                }
-              </ul>
+              <>
+                <ul>
+                  {
+                    cart.map(product => (
+                      <CartItem
+                        key={product.id}
+                        addToCart={() => addToCart(product)}
+                        {...product}
+                      />
+                    ))
+                  }
+                </ul>
+                <div>
+                  <label>Total: ${total}</label>
+                </div>
+              </>
               )
             : <EmptyCart />
         }
