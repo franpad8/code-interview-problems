@@ -11,5 +11,15 @@ export function useCart () {
     })
   }
 
-  return { cart, addToCart }
+  function alreadyInCart (productToFind) {
+    return cart.some(product => product.id === productToFind.id)
+  }
+
+  function removeFromCart (productToRemove) {
+    setCart((prevState) => {
+      return [...prevState].filter(p => p.id !== productToRemove.id)
+    })
+  }
+
+  return { addToCart, alreadyInCart, cart, removeFromCart }
 }

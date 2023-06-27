@@ -1,27 +1,57 @@
 import './Products.css'
-import { AddToCartIcon } from './Icons'
+import { AddToCartIcon, RemoveFromCartIcon } from './Icons'
 import { useCart } from '../hooks/useCart'
 
+function ProductItem ({ product, isInCart, addToCart, removeFromCart }) {
+  function handleCarButtonClick () {
+    if (isInCart) {
+      removeFromCart(product)
+    } else {
+      addToCart(product)
+    }
+  }
+
+  return (
+    <li>
+      <img src={product.thumbnail} alt={product.title} />
+      <div>
+        <strong>{product.title}</strong> - {product.price}$
+      </div>
+      <div>
+        <button
+          onClick={handleCarButtonClick}
+          style={{ backgroundColor: `${isInCart ? 'red' : '#09f'}` }}
+        >
+          {
+            isInCart
+              ? <RemoveFromCartIcon />
+              : <AddToCartIcon />
+          }
+        </button>
+      </div>
+    </li>
+  )
+}
+
 export function Products ({ products }) {
-  const { addToCart } = useCart()
+  const { addToCart, alreadyInCart, removeFromCart } = useCart()
 
   return (
     <main className='products'>
       <ul>
         {
-          products.map(product => (
-            <li key={product.id}>
-              <img src={product.thumbnail} alt={product.title} />
-              <div>
-                <strong>{product.title}</strong> - {product.price}$
-              </div>
-              <div>
-                <button onClick={() => addToCart(product)} style={{ backgroundColor: '#09f' }}>
-                  <AddToCartIcon />
-                </button>
-              </div>
-            </li>
-          ))
+          products.map(product => {
+            const isInCart = alreadyInCart(product)
+            return (
+              <ProductItem
+                key={product.id}
+                product={product}
+                isInCart={isInCart}
+                addToCart={addToCart}
+                removeFromCart={removeFromCart}
+              />
+            )
+          })
         }
       </ul>
     </main>
