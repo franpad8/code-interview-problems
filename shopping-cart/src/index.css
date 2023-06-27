@@ -14,7 +14,7 @@
   -webkit-text-size-adjust: 100%;
 }
 
-#root {
+#app {
   max-width: 600px;
   margin: 0 auto;
   padding: 2rem;
