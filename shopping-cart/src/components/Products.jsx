@@ -1,5 +1,7 @@
 import './Products.css'
 import { AddToCartIcon, RemoveFromCartIcon } from './Icons'
+import { CartContext } from '../contexts/cart'
+import { useContext } from 'react'
 import { useCart } from '../hooks/useCart'
 
 function ProductItem ({ product, isInCart, addToCart, removeFromCart }) {
@@ -34,7 +36,8 @@ function ProductItem ({ product, isInCart, addToCart, removeFromCart }) {
 }
 
 export function Products ({ products }) {
-  const { addToCart, alreadyInCart, removeFromCart } = useCart()
+  const { addToCart, removeFromCart } = useContext(CartContext)
+  const { alreadyInCart } = useCart()
 
   return (
     <main className='products'>

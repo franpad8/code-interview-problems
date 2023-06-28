@@ -1,6 +1,7 @@
 import './Cart.css'
-import { useId } from 'react'
+import { useContext, useId } from 'react'
 import { CartIcon } from './Icons'
+import { CartContext } from '../contexts/cart'
 import { useCart } from '../hooks/useCart'
 
 function CartItem ({ thumbnail, price, title, quantity, addToCart }) {
@@ -28,7 +29,8 @@ const EmptyCart = () => (<p>Aun no hay productos en el carrito</p>)
 
 export function Cart () {
   const cartCheckboxId = useId()
-  const { addToCart, cart, total } = useCart()
+  const { addToCart, cart } = useContext(CartContext)
+  const { total } = useCart()
   const hasProducts = cart.length > 0
 
   return (
